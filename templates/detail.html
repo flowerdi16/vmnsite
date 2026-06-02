@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ emp.name }}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- КНОПКА НАЗАД -->
+<a href="/" class="back-btn">← Назад</a>
+
+<div class="detail-container">
+
+    <!-- ФОТО -->
+    <div class="detail-photo">
+        {% if emp.image %}
+            <img src="{{ url_for('static', filename='uploads/' + emp.image) }}">
+        {% else %}
+            <div class="no-img big">Нет фото</div>
+        {% endif %}
+    </div>
+
+    <!-- ИМЯ -->
+    <h1 class="detail-name">{{ emp.name }}</h1>
+
+    <!-- ПОЛНОЕ ОПИСАНИЕ -->
+    <p class="detail-text">
+        {{ emp.full_desc }}
+    </p>
+
+    <!-- ССЫЛКИ -->
+    <div class="links">
+
+        {% if links %}
+            {% for link in links %}
+                <a href="{{ link.url }}" target="_blank" class="link-btn">
+                    {{ link.title }}
+                </a>
+            {% endfor %}
+        {% else %}
+            <p class="no-links">Ссылок пока нет</p>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
