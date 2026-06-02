@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<a href="/" class="back-btn">← На сайт</a>
+<a href="/logout" class="logout-btn">Выйти</a>
+
+<h1 class="title">Админ-панель</h1>
+
+<div class="admin-container">
+
+    <!-- ФОРМА ДОБАВЛЕНИЯ -->
+    <div class="admin-box">
+
+        <h2>Добавить сотрудника</h2>
+
+        <form method="post" action="/add" enctype="multipart/form-data">
+
+            <input type="text" name="name" placeholder="Имя" required>
+
+            <input type="file" name="image">
+
+            <textarea name="short_desc" placeholder="Краткое описание"></textarea>
+
+            <textarea name="full_desc" placeholder="Полное описание"></textarea>
+
+            <h3>Ссылки (можно не все заполнять)</h3>
+
+            {% for i in range(1, 11) %}
+                <input type="text" name="link_title_{{ i }}" placeholder="Название ссылки {{ i }}">
+                <input type="text" name="link_url_{{ i }}" placeholder="URL ссылки {{ i }}">
+            {% endfor %}
+
+            <button type="submit" class="btn">
+                Добавить
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- СПИСОК СОТРУДНИКОВ -->
+    <div class="admin-list">
+
+        <h2>Сотрудники</h2>
+
+        {% for emp in employees %}
+
+        <div class="admin-item">
+
+            <p>{{ emp.name }}</p>
+
+            <div class="admin-actions">
+                <a href="/edit/{{ emp.id }}" class="btn-small">Редактировать</a>
+                <a href="/delete/{{ emp.id }}" class="btn-danger"
+                   onclick="return confirm('Удалить сотрудника?')">
+                   Удалить
+                </a>
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
