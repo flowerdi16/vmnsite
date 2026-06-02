@@ -183,7 +183,9 @@ def edit_employee(id):
     links = Link.query.filter_by(employee_id=id).all()
     return render_template("edit.html", emp=emp, links=links)
 
-
+with app.app_context():
+    db.create_all() 
+    
 # ====== ЗАПУСК ======
 if __name__ == "__main__":
     with app.app_context():
