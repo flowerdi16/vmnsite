@@ -18,7 +18,7 @@
     <!-- ФОТО -->
     <div class="detail-photo">
         {% if emp.image %}
-            <img src="{{ url_for('static', filename='uploads/' + emp.image) }}">
+            <img src="{{ emp.image }}">
         {% else %}
             <div class="no-img big">Нет фото</div>
         {% endif %}
