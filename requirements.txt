@@ -3,3 +3,4 @@ flask-sqlalchemy
 gunicorn
 werkzeug
 psycopg2-binary
+cloudinary
