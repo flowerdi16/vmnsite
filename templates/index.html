@@ -28,7 +28,7 @@
 
         <div class="img-box">
             {% if emp.image %}
-                <img src="{{ url_for('static', filename='uploads/' + emp.image) }}">
+                <img src="{{ emp.image }}">
             {% else %}
                 <div class="no-img">Нет фото</div>
             {% endif %}
