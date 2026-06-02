@@ -22,12 +22,8 @@ database_url = os.environ.get("DATABASE_URL")
 print("DATABASE_URL found:", bool(database_url))
 
 if not database_url:
-    raise RuntimeError("DATABASE_URL не настроен в Render")
-
-app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
-    "postgres://", "postgresql://"
-)
-
+    print("WARNING: DATABASE_URL is missing")
+    
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
