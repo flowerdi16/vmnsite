@@ -9,9 +9,14 @@ app.secret_key = "super_secret_key_change_me"
 # База данных
 import os
 
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-    "DATABASE_URL"
-).replace("postgres://", "postgresql://")
+database_url = os.environ.get("DATABASE_URL")
+
+if database_url:
+    app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
+        "postgres://", "postgresql://"
+    )
+else:
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///local.db"
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
