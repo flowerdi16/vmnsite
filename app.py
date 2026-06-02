@@ -10,6 +10,8 @@ app.secret_key = "super_secret_key_change_me"
 
 database_url = os.environ.get("DATABASE_URL")
 
+print("DATABASE_URL found:", bool(database_url))
+
 if database_url:
     app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
         "postgres://", "postgresql://"
