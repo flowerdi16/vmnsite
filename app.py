@@ -9,18 +9,18 @@ app.secret_key = "super_secret_key_change_me"
 # База данных
 
 database_url = os.environ.get("DATABASE_URL")
-
 print("DATABASE_URL found:", bool(database_url))
 
-if database_url:
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
-        "postgres://", "postgresql://"
+if not database_url:
+    raise RuntimeError(
+        "DATABASE_URL не настроен. Проверь Environment Variables в Render."
     )
-else:
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///local.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
+    "postgres://", "postgresql://"
+)
 
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-
 # Загрузка файлов
 UPLOAD_FOLDER = "static/uploads"
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
