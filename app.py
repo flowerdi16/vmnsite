@@ -7,7 +7,6 @@ app = Flask(__name__)
 app.secret_key = "super_secret_key_change_me"
 
 # База данных
-import os
 
 database_url = os.environ.get("DATABASE_URL")
 
