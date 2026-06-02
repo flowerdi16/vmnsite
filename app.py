@@ -23,7 +23,12 @@ print("DATABASE_URL found:", bool(database_url))
 
 if not database_url:
     print("WARNING: DATABASE_URL is missing")
-    
+    database_url = "sqlite:///local.db"
+
+app.config["SQLALCHEMY_DATABASE_URI"] = database_url.replace(
+    "postgres://", "postgresql://"
+)
+
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
