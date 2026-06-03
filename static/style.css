@@ -342,3 +342,16 @@ body {
     font-size:40px;
     cursor:pointer;
 }
+
+.support-footer{
+    text-align:center;
+    margin:40px 0;
+}
+
+.support-btn{
+    display:inline-block;
+    padding:12px 24px;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+}
