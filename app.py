@@ -67,9 +67,19 @@ def index():
 @app.route("/employee/<int:id>")
 def employee(id):
     emp = Employee.query.get_or_404(id)
-    links = Link.query.filter_by(employee_id=id).all()
-    return render_template("detail.html", emp=emp, links=links)
 
+    links = Link.query.filter_by(employee_id=id).all()
+
+    gallery = GalleryImage.query.filter_by(
+        employee_id=id
+    ).all()
+
+    return render_template(
+        "detail.html",
+        emp=emp,
+        links=links,
+        gallery=gallery
+    )
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -122,6 +132,23 @@ def add_employee():
 
     db.session.add(emp)
     db.session.commit()
+
+    gallery_files = request.files.getlist("gallery")
+    
+    for file in gallery_files[:20]:
+        
+        if file and file.filename:
+            
+            result = cloudinary.uploader.upload(file)
+            
+            db.session.add(
+                GalleryImage(
+                    employee_id=emp.id,
+                    image_url=result["secure_url"]
+                )
+            )
+
+db.session.commit()
 
     for i in range(1, 11):
         title = request.form.get(f"link_title_{i}")
