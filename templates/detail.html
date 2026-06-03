@@ -32,6 +32,38 @@
         {{ emp.full_desc }}
     </p>
 
+    {% if gallery %}
+
+<h2 class="gallery-title">Фотографии</h2>
+
+<div class="gallery-wrapper">
+
+    <button class="gallery-btn"
+            onclick="scrollGallery(-300)">
+        ❮
+    </button>
+
+    <div class="gallery" id="gallery">
+
+        {% for img in gallery %}
+            <img
+                src="{{ img.image_url }}"
+                class="gallery-img"
+                onclick="openImage('{{ img.image_url }}')"
+            >
+        {% endfor %}
+
+    </div>
+
+    <button class="gallery-btn"
+            onclick="scrollGallery(300)">
+        ❯
+    </button>
+
+</div>
+
+{% endif %}
+    
     <!-- ССЫЛКИ -->
     <div class="links">
 
@@ -48,6 +80,39 @@
     </div>
 
 </div>
+
+<div id="imageModal" class="image-modal">
+
+    <span class="close-modal"
+          onclick="closeImage()">
+        ×
+    </span>
+
+    <img id="modalImage"
+         class="modal-image">
+
+</div>
+
+<script>
+
+function scrollGallery(amount){
+    document.getElementById("gallery")
+    .scrollBy({
+        left: amount,
+        behavior: "smooth"
+    });
+}
+
+function openImage(src){
+    document.getElementById("modalImage").src = src;
+    document.getElementById("imageModal").style.display = "flex";
+}
+
+function closeImage(){
+    document.getElementById("imageModal").style.display = "none";
+}
+
+</script>
 
 </body>
 </html>
