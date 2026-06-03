@@ -52,6 +52,11 @@ class Link(db.Model):
     title = db.Column(db.String(120))
     url = db.Column(db.String(255))
 
+class GalleryImage(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    employee_id = db.Column(db.Integer, db.ForeignKey("employee.id"))
+    image_url = db.Column(db.Text)
+    
 # ================== ROUTES ==================
 @app.route("/")
 def index():
