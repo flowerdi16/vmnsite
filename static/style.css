@@ -281,3 +281,64 @@ body {
     border-radius: 10px;
     margin: 10px 0;
 }
+
+.gallery-wrapper{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:30px;
+}
+
+.gallery{
+    display:flex;
+    overflow-x:auto;
+    gap:12px;
+    flex:1;
+    scroll-behavior:smooth;
+}
+
+.gallery::-webkit-scrollbar{
+    display:none;
+}
+
+.gallery-img{
+    width:180px;
+    height:180px;
+    object-fit:cover;
+    border-radius:12px;
+    cursor:pointer;
+    flex-shrink:0;
+}
+
+.gallery-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:20px;
+}
+
+.image-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.9);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.modal-image{
+    max-width:90%;
+    max-height:90%;
+}
+
+.close-modal{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
