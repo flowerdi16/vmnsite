@@ -133,14 +133,13 @@ def add_employee():
     db.session.add(emp)
     db.session.commit()
 
+    # ===== ГАЛЕРЕЯ (до 20 фото) =====
     gallery_files = request.files.getlist("gallery")
-    
+
     for file in gallery_files[:20]:
-        
         if file and file.filename:
-            
             result = cloudinary.uploader.upload(file)
-            
+
             db.session.add(
                 GalleryImage(
                     employee_id=emp.id,
@@ -148,18 +147,21 @@ def add_employee():
                 )
             )
 
-db.session.commit()
+    db.session.commit()
 
+    # ===== ССЫЛКИ =====
     for i in range(1, 11):
         title = request.form.get(f"link_title_{i}")
         url = request.form.get(f"link_url_{i}")
 
         if title and url:
-            db.session.add(Link(employee_id=emp.id, title=title, url=url))
+            db.session.add(
+                Link(employee_id=emp.id, title=title, url=url)
+            )
 
     db.session.commit()
-    return redirect("/admin")
 
+    return redirect("/admin")
 
 # ================== DELETE ==================
 @app.route("/delete/<int:id>")
